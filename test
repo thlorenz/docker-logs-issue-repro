@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+docker build -t="thlorenz/docker-logs-issue-repro" .
+JOB=$(docker run -d thlorenz/docker-logs-issue-repro)
+
+# The below should print out the entire license file, but prints only about the top 20% or even less (it varies)
+
+echo '\n\033[00;32m +++ FIRST LOG +++\033[00m\n'
+docker logs $JOB
+
+echo '\n\033[00;32m +++ SECOND LOG +++\033[00m\n'
+docker logs $JOB
+
+echo '\n\033[00;32m +++ THIRD LOG +++\033[00m\n'
+docker logs $JOB
